@@ -1,17 +1,39 @@
-import { ChefCuisine } from "./chef-cuisine";
+
+import { Chef } from "./chef";
 import { Etape } from "./etape";
 import { Ingredient } from "./ingredient";
-import { TypeRecette } from "./type-recette";
+import { Type } from "./type";
 
+export class Recette {
+  id: number;
+  nom: string;
+  description: string;
+  duree: number;
+  datePublication: Date;
+  ingredients: Ingredient[];
+  etapes: Etape[];
+  chefCuisine: Chef;
+  typeRecette: Type;
 
-export interface Recette {
-    id: number;
-    nom: string;
-    description: string;
-    duree: number;
-    date_publication: Date;
-    ingredients: Ingredient[];
-    etapes: Etape[];
-    chefCuisine: ChefCuisine;
-    typeRecette: TypeRecette;
+  constructor(
+    id: number,
+    nom: string,
+    description: string,
+    duree: number,
+    datePublication: Date,
+    ingredients: Ingredient[],
+    etapes: Etape[],
+    chefCuisine: Chef,
+    typeRecette: Type
+  ) {
+    this.id = id;
+    this.nom = nom;
+    this.description = description;
+    this.duree = duree;
+    this.datePublication = datePublication;
+    this.ingredients = ingredients;
+    this.etapes = etapes;
+    this.chefCuisine = chefCuisine;
+    this.typeRecette = typeRecette;
+  }
 }

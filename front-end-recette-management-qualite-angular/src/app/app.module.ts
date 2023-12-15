@@ -19,7 +19,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomeComponent,
     DetailsRecetteComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
