@@ -1,3 +1,55 @@
 <app-navbar></app-navbar>
+<div class="container">
+  <div class="info-before-recettes">
+    <div class="jumbotron">
+      <h1 class="display-4">Découvrez le monde avec notre agence de recettes!</h1>
+      <p class="lead">Laissez-vous emporter par l'aventure et créez des souvenirs inoubliables.</p>
+      <hr class="my-4">
+    </div>
+  </div>
 
+  <div class="row">
+    <div *ngFor="let recette of recettes" class="col-md-4">
+      <div class="card" >
+        <img style="height: 300px;" src="{{recette.image}}" class="card-img-top" alt="...">
+
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{recette.nom}}</strong></h5>
+          <p class="card-text">{{recette.description}}</p>
+          <p class="card-text"><strong>{{recette.duree}}</strong></p>
+
+              </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-after-recettes mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Félicitations!</h4>
+          <p>Vous êtes sur le point de vivre une aventure extraordinaire. Réservez dès maintenant!</p>
+          <hr>
+          <p class="mb-0">Besoin d'aide? Notre équipe est là pour vous.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Newsletter</h5>
+            <p class="card-text">Inscrivez-vous à notre newsletter pour recevoir les dernières offres et actualités de recettes.</p>
+            <form>
+              <div class="form-group">
+                <input type="email" class="form-control" id="email" placeholder="Votre adresse e-mail">
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
 <app-footer></app-footer>

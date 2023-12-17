@@ -7,6 +7,7 @@ import { Type } from "./type";
 export class Recette {
   id: number;
   nom: string;
+  image: string;
   description: string;
   duree: number;
   datePublication: Date;
@@ -18,6 +19,7 @@ export class Recette {
   constructor(
     id: number,
     nom: string,
+    image: string,
     description: string,
     duree: number,
     datePublication: Date,
@@ -30,6 +32,7 @@ export class Recette {
     this.nom = nom;
     this.description = description;
     this.duree = duree;
+    this.image=image;
     this.datePublication = datePublication;
     this.ingredients = ingredients;
     this.etapes = etapes;
