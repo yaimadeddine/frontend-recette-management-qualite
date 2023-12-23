@@ -8,7 +8,7 @@ import { Type } from '../models/type';
 })
 export class TypeService {
 
-  private apiUrl = "http://localhost:8030/types";
+  private apiUrl = "http://localhost:8030/types-recette";
 
   constructor(private http: HttpClient) { }
 

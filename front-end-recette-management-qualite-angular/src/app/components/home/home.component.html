@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="container">
+
   <div class="info-before-recettes">
     <div class="jumbotron">
       <h1 class="display-4">Explorez le monde culinaire avec nos délicieuses recettes!</h1>
@@ -8,6 +9,13 @@
       <hr class="my-4">
     </div>
   </div>
+  <div class="types-container row">
+    <div *ngFor="let type of types" class="type-card col-md-2">
+      <img style="height: 50px;width: 50px;" [src]="type.image" alt="{{ type.libelle }}" class="type-image">
+      <h6>{{ type.libelle }}</h6>
+    </div>
+  </div>
+
 
   <div class="row">
     <div *ngFor="let recette of recettes" class="col-md-4">
@@ -17,6 +25,8 @@
         <div class="card-body">
           <h5 class="card-title"><strong>{{recette.nom}}</strong></h5>
           <p class="card-text">{{recette.duree}} min</p>
+          <p> <strong>Chef : </strong> {{ recette.chefCuisine.nom }} {{ recette.chefCuisine.prenom }}</p>
+
           <a [routerLink]="['/recette', recette.id]"
           class="btn btn-primary">Details
         </a>
