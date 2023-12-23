@@ -1,9 +1,10 @@
 <app-navbar></app-navbar>
+
 <div class="container">
   <div class="info-before-recettes">
     <div class="jumbotron">
-      <h1 class="display-4">Découvrez le monde avec notre agence de recettes!</h1>
-      <p class="lead">Laissez-vous emporter par l'aventure et créez des souvenirs inoubliables.</p>
+      <h1 class="display-4">Explorez le monde culinaire avec nos délicieuses recettes!</h1>
+      <p class="lead">Laissez-vous emporter par le plaisir de cuisiner et créez des saveurs inoubliables.</p>
       <hr class="my-4">
     </div>
   </div>
@@ -15,10 +16,11 @@
 
         <div class="card-body">
           <h5 class="card-title"><strong>{{recette.nom}}</strong></h5>
-          <p class="card-text">{{recette.description}}</p>
-          <p class="card-text"><strong>{{recette.duree}}</strong></p>
-
-              </div>
+          <p class="card-text">{{recette.duree}} min</p>
+          <a [routerLink]="['/recette', recette.id]"
+          class="btn btn-primary">Details
+        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -28,7 +30,7 @@
       <div class="col-md-6">
         <div class="alert alert-success" role="alert">
           <h4 class="alert-heading">Félicitations!</h4>
-          <p>Vous êtes sur le point de vivre une aventure extraordinaire. Réservez dès maintenant!</p>
+          <p>Vous êtes sur le point de vivre une expérience culinaire extraordinaire. Essayez dès maintenant!</p>
           <hr>
           <p class="mb-0">Besoin d'aide? Notre équipe est là pour vous.</p>
         </div>
@@ -37,7 +39,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Newsletter</h5>
-            <p class="card-text">Inscrivez-vous à notre newsletter pour recevoir les dernières offres et actualités de recettes.</p>
+            <p class="card-text">Inscrivez-vous à notre newsletter pour recevoir les dernières recettes et actualités culinaires.</p>
             <form>
               <div class="form-group">
                 <input type="email" class="form-control" id="email" placeholder="Votre adresse e-mail">
