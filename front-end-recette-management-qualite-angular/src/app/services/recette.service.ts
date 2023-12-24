@@ -8,7 +8,7 @@ import { Recette } from '../models/recette';
 })
 export class RecetteService {
 
-  private apiUrl = 'http://localhost:8030/recettes';
+  private apiUrl = 'http://localhost:8888/RECETTE-MS/api/recette/';
 
   constructor(private http: HttpClient) { }
 
