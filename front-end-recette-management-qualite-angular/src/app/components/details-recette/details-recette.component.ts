@@ -20,11 +20,12 @@ export class DetailsRecetteComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const recetteId = +params['id'];
+      const recetteId: string = params['id'];
       this.recettesService.findById(recetteId).subscribe(
         (data) => {
 
           this.recette = data;
+          console.log(this.recette);
 
         },
         (error) => {

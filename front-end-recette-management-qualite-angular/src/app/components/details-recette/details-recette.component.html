@@ -13,11 +13,9 @@
       <p>{{ recette.description }}</p>
 
       <p> <strong>Categorie : </strong> {{ recette.typeRecette.libelle }} </p>
-      <p> <strong>Chef cuisine : </strong> {{ recette.chefCuisine.nom }} {{ recette.chefCuisine.prenom }}</p>
       <p> <strong>Ingredients : </strong> </p>
       <div *ngFor="let ingredient of recette.ingredients" class="col-md-4">
         <p>&#x2022; {{ ingredient.quantite }} {{ ingredient.unite }} {{ ingredient.nom }}</p>
-
       </div>
 
       <p> <strong>Etapes : </strong> </p>

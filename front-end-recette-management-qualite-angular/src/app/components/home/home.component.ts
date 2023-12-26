@@ -1,3 +1,4 @@
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { TypeService } from './../../services/type.service';
 import { Component } from '@angular/core';
 import { Recette } from 'src/app/models/recette';
@@ -14,7 +15,7 @@ export class HomeComponent {
   recettes: Recette[] = [];
 
   constructor(private recetteService: RecetteService,
-    private typesService: TypeService) {}
+    private typesService: TypeService,private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.getTypes();
@@ -22,10 +23,16 @@ export class HomeComponent {
 
 
   }
+  getImageUrl(imageData: Uint8Array): SafeUrl {
+    const blob = new Blob([imageData], { type: 'image/jpeg' });
+    const imageUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+    return imageUrl;
+  }
 
   getRecettes() {
     this.recetteService.findAll().subscribe((recettes) => {
       this.recettes = recettes;
+      console.log(this.recettes);
     });
   }
   getTypes() {

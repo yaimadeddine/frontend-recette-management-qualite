@@ -16,8 +16,8 @@ export class RecetteService {
     return this.http.get<Recette[]>(this.apiUrl);
   }
 
-  findById(recetteId: number): Observable<Recette> {
-    const getUrl = `${this.apiUrl}/${recetteId}`;
+  findById(recetteId: string): Observable<Recette> {
+    const getUrl = `${this.apiUrl}/ref/${recetteId}`;
     return this.http.get<Recette>(getUrl);
   }
 
