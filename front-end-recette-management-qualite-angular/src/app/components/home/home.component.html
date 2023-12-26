@@ -20,15 +20,12 @@
   <div class="row">
     <div *ngFor="let recette of recettes" class="col-md-4">
       <div class="card" >
-        <div *ngIf="recette.images && recette.images.length > 0">
-          <div *ngFor="let image of recette.images">
-            <img style="height: 150px; width: 100%;" [src]="getImageUrl(image.imageData)" alt="{{ image.name }}" class="card-img-top">
-          </div>
-        </div>
+
+            <img style="height: 150px; width: 100%;" [src]="recette.image" alt="{{ recette.nom }}" class="card-img-top">
+
         <div class="card-body">
           <h5 class="card-title"><strong>{{recette.nom}}</strong></h5>
           <p class="card-text">{{recette.duree}} min</p>
-          <p> <strong>Chef : </strong> {{ recette.chefCuisine.nom }} {{ recette.chefCuisine.prenom }}</p>
 
           <a [routerLink]="['/recette', recette.ref]"
           class="btn btn-primary">Details

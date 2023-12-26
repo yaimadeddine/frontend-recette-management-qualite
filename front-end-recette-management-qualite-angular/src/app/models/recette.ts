@@ -1,7 +1,6 @@
 
 import { Chef } from "./chef";
 import { Etape } from "./etape";
-import { Image } from "./image";
 import { Ingredient } from "./ingredient";
 import { Type } from "./type";
 
@@ -14,7 +13,7 @@ export class Recette {
   datePublication: Date;
   ingredients: Ingredient[];
   etapes: Etape[];
-  images: Image[];
+  image: string;
   chefCuisine: Chef;
   typeRecette: Type;
 
@@ -24,7 +23,7 @@ export class Recette {
     ref: string,
     description: string,
     duree: number,
-    images: Image[],
+    image: string,
     datePublication: Date,
     ingredients: Ingredient[],
     etapes: Etape[],
@@ -34,7 +33,7 @@ export class Recette {
     this.id = id;
     this.ref=ref;
     this.nom = nom;
-    this.images=images;
+    this.image=image;
     this.description = description;
     this.duree = duree;
     this.datePublication = datePublication;
