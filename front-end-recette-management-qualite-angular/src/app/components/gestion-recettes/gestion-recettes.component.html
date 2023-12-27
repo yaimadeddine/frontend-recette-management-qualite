@@ -1,7 +1,11 @@
+<div class="wrapper">
+
 <app-navbar></app-navbar>
 
 <div class="container">
-
+  <button class="btn btn-primary" (click)="showAddForm()">
+    <i class="fa-solid fa-plus"></i>
+  </button>
   <table class="table">
     <thead>
       <tr>
@@ -10,8 +14,9 @@
         <th>Description</th>
         <th>Durée (min)</th>
         <th>Image</th>
+        <th>Ingredients</th>
+        <th>Etapes</th>
         <th>Type</th>
-
         <th>Actions</th>
       </tr>
     </thead>
@@ -25,15 +30,25 @@
         <td>
           <img [src]="recette.image" alt="{{ recette.nom }}" style="max-width: 50px; max-height: 50px;">
         </td>
+<td>
+  <ul>
+    <li *ngFor="let ingredient of recette.ingredients">{{ ingredient.quantite }} {{ ingredient.unite }} {{ ingredient.nom }}</li>
+  </ul>
+</td>
+<td>
+  <ol>
+    <li *ngFor="let etape of recette.etapes">{{ etape.description }} dans : <strong>{{ etape.duree }} min</strong></li>
+  </ol>
+</td>
+
         <td>{{ recette.typeRecette.libelle }}</td>
 
         <td>
-          <button class="btn btn-success" >
-            <i class="fa-solid fa-eye"></i>          </button>
-          <button class="btn btn-danger" >
+
+          <button class="btn btn-danger" (click)="deleteRecette(recette)">
             <i class="fa-solid fa-trash"></i>
           </button>
-          <button class="btn btn-warning" >
+          <button class="btn btn-warning" (click)="editRecette(recette)">
             <i class="fa-solid fa-pencil"></i>
           </button>
         </td>
@@ -43,3 +58,4 @@
 <br/>
 </div>
 <app-footer></app-footer>
+</div>

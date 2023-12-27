@@ -21,14 +21,13 @@ export class RecetteService {
     return this.http.get<Recette>(getUrl);
   }
 
-  delete(recetteId: number): Observable<void> {
-    const deleteUrl = `${this.apiUrl}/${recetteId}`;
+  delete(recetteId: string): Observable<void> {
+    const deleteUrl = `${this.apiUrl}/ref/${recetteId}`;
     return this.http.delete<void>(deleteUrl);
   }
 
   update(recette: Recette): Observable<Recette> {
-    const updateUrl = `${this.apiUrl}/${recette.id}`;
-    return this.http.put<Recette>(updateUrl, recette);
+    return this.http.put<Recette>(this.apiUrl, recette);
   }
 
   add(newRecette: Recette): Observable<Recette> {

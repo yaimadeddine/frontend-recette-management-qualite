@@ -36,6 +36,8 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         console.error('Erreur lors de l\'ajout du chef:', error);
+        this.router.navigate(['/gestion-recettes']);
+
       }
     );
   }

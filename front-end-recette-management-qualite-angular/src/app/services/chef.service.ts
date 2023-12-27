@@ -34,4 +34,7 @@ export class ChefService {
   add(newChef: Chef): Observable<Chef> {
     return this.http.post<Chef>(this.apiUrl, newChef);
   }
+  authentification(chef: Chef): Observable<Chef> {
+    return this.http.post<Chef>(`${this.apiUrl}/authentification/`, chef);
+  }
 }
