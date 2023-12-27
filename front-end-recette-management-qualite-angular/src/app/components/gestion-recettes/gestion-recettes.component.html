@@ -1,1 +1,45 @@
-<p>gestion-recettes works!</p>
+<app-navbar></app-navbar>
+
+<div class="container">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Durée (min)</th>
+        <th>Image</th>
+        <th>Type</th>
+
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let recette of recettes">
+        <td>{{ recette.id }}</td>
+        <td>{{ recette.nom }}</td>
+        <td>{{ recette.description }}</td>
+
+        <td>{{ recette.duree }}</td>
+        <td>
+          <img [src]="recette.image" alt="{{ recette.nom }}" style="max-width: 50px; max-height: 50px;">
+        </td>
+        <td>{{ recette.typeRecette.libelle }}</td>
+
+        <td>
+          <button class="btn btn-success" >
+            <i class="fa-solid fa-eye"></i>          </button>
+          <button class="btn btn-danger" >
+            <i class="fa-solid fa-trash"></i>
+          </button>
+          <button class="btn btn-warning" >
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<br/>
+</div>
+<app-footer></app-footer>

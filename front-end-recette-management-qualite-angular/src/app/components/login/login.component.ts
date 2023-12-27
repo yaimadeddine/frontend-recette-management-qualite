@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import  ParticlesConfig from '../particles.json';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,11 +8,14 @@ import  ParticlesConfig from '../particles.json';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  particlesConfig = ParticlesConfig;
+  user = { email: '', nom: '', prenom: '', password: '' };
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+  }
+  redirectToGestionRecettes() {
+    this.router.navigate(['/gestion-recettes']);
   }
 }

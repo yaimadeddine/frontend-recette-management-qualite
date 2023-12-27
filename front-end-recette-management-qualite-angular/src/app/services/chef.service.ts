@@ -8,7 +8,7 @@ import { Chef } from '../models/chef';
 })
 export class ChefService {
 
-  private apiUrl = 'http://localhost:8030/chefs';
+  private apiUrl = 'http://localhost:8888/USER-MS/api/user/';
 
   constructor(private http: HttpClient) { }
 
