@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Chef } from 'src/app/models/chef';
 import { Recette } from 'src/app/models/recette';
+import { Response } from 'src/app/models/response';
 import { RecetteService } from 'src/app/services/recette.service';
 
 @Component({
@@ -14,6 +16,8 @@ export class GestionRecettesComponent {
   showAddFormFlag: boolean = false;
   showEditFormFlag: boolean = false;
   newRecette:any;
+  chefs: Chef[] = [];
+
   editRecetteId: number | null = null;
 
   constructor(private recetteService: RecetteService,private modalService: NgbModal) {}
@@ -48,8 +52,10 @@ export class GestionRecettesComponent {
 
 
   getRecettes() {
-    this.recetteService.findAll().subscribe((recettes) => {
-      this.recettes = recettes;
+    this.recetteService.findAll().subscribe((responseEntityArray: Response[]) => {
+      this.recettes = responseEntityArray.map(responseEntity => responseEntity.recette);
+      this.chefs = responseEntityArray.map(responseEntity => responseEntity.userVo);
+
     });
   }
   closeRecipeModal() {

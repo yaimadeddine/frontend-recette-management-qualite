@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Recette } from '../models/recette';
+import { Response } from '../models/response';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class RecetteService {
 
   constructor(private http: HttpClient) { }
 
-  findAll(): Observable<Recette[]> {
-    return this.http.get<Recette[]>(this.apiUrl);
+  findAll(): Observable<Response[]> {
+    return this.http.get<Response[]>(this.apiUrl);
   }
 
   findById(recetteId: string): Observable<Recette> {

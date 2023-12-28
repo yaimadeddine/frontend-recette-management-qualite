@@ -18,22 +18,19 @@
 
 
   <div class="row">
-    <div *ngFor="let recette of recettes" class="col-md-4">
-      <div class="card" >
-
-            <img style="height: 150px; width: 100%;" [src]="recette.image" alt="{{ recette.nom }}" class="card-img-top">
-
+    <div *ngFor="let recette of recettes; let i = index" class="col-md-4">
+      <div class="card">
+        <img style="height: 150px; width: 100%;" [src]="recette.image" alt="{{ recette.nom }}" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title"><strong>{{recette.nom}}</strong></h5>
           <p class="card-text">{{recette.duree}} min</p>
-
-          <a [routerLink]="['/recette', recette.ref]"
-          class="btn btn-primary">Details
-        </a>
+          <p class="card-text"><strong>Chef:</strong> {{ chefs[i].nom }} {{ chefs[i].prenom }}</p>
+          <a [routerLink]="['/recette', recette.ref]" class="btn btn-primary">Details</a>
         </div>
       </div>
     </div>
   </div>
+
 
   <div class="info-after-recettes mt-5">
     <div class="row">
