@@ -20,7 +20,6 @@ export class GestionRecettesComponent {
   showEditFormFlag: boolean = false;
   recetteSuccess:boolean = false;
   chefs: Chef[] = [];
-  neWtype:Type=new Type(0, "", "", "");
   newRecette: Recette = {  id:0,
     nom:"",
     ref:this.generateRandomReference(),
@@ -29,7 +28,9 @@ export class GestionRecettesComponent {
     image:"",
     datePublication:new Date(),
     userRef:"",
-    typeRecette:this.neWtype,}
+    typeRecette: this.types[0] || new Type(0, "", "", ""),
+
+  }
 
   editRecetteId: number | null = null;
 
@@ -50,7 +51,8 @@ export class GestionRecettesComponent {
       image:"",
       datePublication:new Date(),
       userRef:"",
-      typeRecette:this.neWtype,}
+      typeRecette: this.types[0] || new Type(0, "", "", ""),
+    }
   }
   getTypes() {
     this.typesService.findAll().subscribe((types) => {
