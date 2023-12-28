@@ -3,7 +3,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Chef } from 'src/app/models/chef';
 import { Recette } from 'src/app/models/recette';
 import { Response } from 'src/app/models/response';
+import { Type } from 'src/app/models/type';
 import { RecetteService } from 'src/app/services/recette.service';
+import { TypeService } from 'src/app/services/type.service';
 
 @Component({
   selector: 'app-gestion-recettes',
@@ -12,20 +14,57 @@ import { RecetteService } from 'src/app/services/recette.service';
 })
 export class GestionRecettesComponent {
   recettes: Recette[] = [];
+  types: Type[] = [];
   selectedRecipe:any;
   showAddFormFlag: boolean = false;
   showEditFormFlag: boolean = false;
-  newRecette:any;
+  recetteSuccess:boolean = false;
   chefs: Chef[] = [];
+  neWtype:Type=new Type(0, "", "", "");
+  newRecette: Recette = {  id:0,
+    nom:"",
+    ref:this.generateRandomReference(),
+    description:"",
+    duree:0,
+    image:"",
+    datePublication:new Date(),
+    userRef:"",
+    typeRecette:this.neWtype,}
 
   editRecetteId: number | null = null;
 
-  constructor(private recetteService: RecetteService,private modalService: NgbModal) {}
+  constructor(private recetteService: RecetteService,private modalService: NgbModal,private typesService: TypeService) {}
 
   ngOnInit(): void {
     this.getRecettes();
+    this.getTypes();
 
 
+  }
+  resetForm(): void {
+    this.newRecette={  id:0,
+      nom:"",
+      ref:this.generateRandomReference(),
+      description:"",
+      duree:0,
+      image:"",
+      datePublication:new Date(),
+      userRef:"",
+      typeRecette:this.neWtype,}
+  }
+  getTypes() {
+    this.typesService.findAll().subscribe((types) => {
+      this.types = types;
+    });
+  }
+  generateRandomReference(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const length = 8;
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
   }
   deleteRecette(recetteD:Recette): void {
     this.recetteService.delete(recetteD.ref).subscribe(() => {
@@ -38,6 +77,12 @@ export class GestionRecettesComponent {
     this.editRecetteId = recette.id;
     this.newRecette = { ...recette };
   }
+  cancelForm(): void {
+    this.showAddFormFlag = false;
+    this.showEditFormFlag = false;
+    this.editRecetteId = null;
+    this.resetForm();
+  }
 
   updateRecette(): void {
     if (this.editRecetteId !== null) {
@@ -49,7 +94,25 @@ export class GestionRecettesComponent {
       });
     }
   }
+  submitForm(): void {
+    if (this.showAddFormFlag) {
+      this.addRecette();
+    } else if (this.showEditFormFlag) {
+      this.updateRecette();
+    }
+  }
+  addRecette(): void {
+    this.recetteService.add(this.newRecette).subscribe(addedRecette => {
+      this.recettes.push(addedRecette);
+      this.showAddFormFlag = false;
+      this.resetForm();
+      this.recetteSuccess = true;
+      setTimeout(() => {
+        this.recetteSuccess = false;
+      }, 3000);
+    });
 
+  }
 
   getRecettes() {
     this.recetteService.findAll().subscribe((responseEntityArray: Response[]) => {
@@ -65,6 +128,5 @@ export class GestionRecettesComponent {
     this.showAddFormFlag = true;
     this.showEditFormFlag = false;
   }
-
 
 }

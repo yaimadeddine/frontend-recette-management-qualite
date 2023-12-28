@@ -18,7 +18,7 @@ export class HomeComponent {
   chefs: Chef[] = [];
 
   constructor(private recetteService: RecetteService,
-    private typesService: TypeService,private sanitizer: DomSanitizer) {}
+    private typesService: TypeService) {}
 
   ngOnInit(): void {
     this.getTypes();

@@ -3,9 +3,38 @@
 <app-navbar></app-navbar>
 
 <div class="container">
+  <div class="alert alert-success" role="alert" *ngIf="recetteSuccess">
+    <h4 class="alert-heading">Félicitations vous avez bien {{ showAddFormFlag ? 'ajouté' : 'modifié' }} recette</h4>
+  </div>
   <button class="btn btn-primary" (click)="showAddForm()">
     <i class="fa-solid fa-plus"></i>
   </button>
+  <div *ngIf="showAddFormFlag || showEditFormFlag">
+    <form (ngSubmit)="submitForm()" #form="ngForm">
+      <div class="form-group">
+        <label for="nom">Nom:</label>
+        <input type="text" class="form-control" id="nom" required [(ngModel)]="newRecette.nom" name="nom">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" required [(ngModel)]="newRecette.description" name="description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="duree">Durée:</label>
+        <input type="number" class="form-control" id="duree" required [(ngModel)]="newRecette.duree" name="duree">
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image:</label>
+        <input type="text" class="form-control" id="image" [(ngModel)]="newRecette.image" name="image">
+      </div>
+
+      <button type="submit" class="btn btn-success">{{ showAddFormFlag ? 'Ajouter' : 'Mettre à jour' }}</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelForm()">Annuler</button>
+    </form>
+</div>
   <table class="table">
     <thead>
       <tr>
@@ -57,5 +86,5 @@
   </table>
 <br/>
 </div>
-<app-footer></app-footer>
 </div>
+<app-footer></app-footer>
