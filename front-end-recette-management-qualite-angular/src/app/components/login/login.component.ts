@@ -20,12 +20,13 @@ export class LoginComponent implements OnInit {
   redirectToGestionRecettes() {
     this.chefService.authentification(this.user).subscribe(
       (result) => {
-        console.log('Chef ajouté avec succès:', result);
+        localStorage.clear();
+        localStorage.setItem('refUser', result.ref);
+
         this.router.navigate(['/gestion-recettes']);
       },
       (error) => {
-        console.error('Erreur lors de l\'ajout du chef:', error);
-        this.router.navigate(['/gestion-recettes']);
+        console.error('Erreur lors de authentification:', error);
 
       }
     );

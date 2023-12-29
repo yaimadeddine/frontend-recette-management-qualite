@@ -32,6 +32,8 @@ export class RegisterComponent implements OnInit {
     this.chefService.add(this.user).subscribe(
       (result) => {
         console.log('Chef ajouté avec succès:', result);
+        localStorage.clear();
+        localStorage.setItem('refUser', result.ref);
         this.router.navigate(['/gestion-recettes']);
       },
       (error) => {

@@ -25,21 +25,21 @@ export class GestionRecettesComponent {
     ref:this.generateRandomReference(),
     description:"",
     duree:0,
-    image:"",
+    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png",
     datePublication:new Date(),
-    userRef:"",
+    userRef:localStorage.getItem('refUser')||"ZE787",
     typeRecette: this.types[0] || new Type(0, "", "", ""),
-
   }
 
   editRecetteId: number | null = null;
 
-  constructor(private recetteService: RecetteService,private modalService: NgbModal,private typesService: TypeService) {}
+  constructor(private recetteService: RecetteService,private modalService: NgbModal,private typesService: TypeService) {
+    this.getTypes();
+
+  }
 
   ngOnInit(): void {
     this.getRecettes();
-    this.getTypes();
-
 
   }
   resetForm(): void {
@@ -48,9 +48,9 @@ export class GestionRecettesComponent {
       ref:this.generateRandomReference(),
       description:"",
       duree:0,
-      image:"",
+      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png",
       datePublication:new Date(),
-      userRef:"",
+      userRef:localStorage.getItem('refUser')||"ZE787",
       typeRecette: this.types[0] || new Type(0, "", "", ""),
     }
   }
@@ -88,11 +88,9 @@ export class GestionRecettesComponent {
 
   updateRecette(): void {
     if (this.editRecetteId !== null) {
+      console.log('Updating Recette:', this.newRecette);
       this.recetteService.update(this.newRecette).subscribe(updatedRecette => {
-        const index = this.recettes.findIndex(c => c.id === updatedRecette.id);
-        if (index !== -1) {
-          this.recettes[index] = updatedRecette;
-        }
+        this.getRecettes();
       });
     }
   }
@@ -105,9 +103,8 @@ export class GestionRecettesComponent {
   }
   addRecette(): void {
     this.recetteService.add(this.newRecette).subscribe(addedRecette => {
-      this.recettes.push(addedRecette);
-      this.showAddFormFlag = false;
       this.resetForm();
+      this.getRecettes();
       this.recetteSuccess = true;
       setTimeout(() => {
         this.recetteSuccess = false;
@@ -117,7 +114,7 @@ export class GestionRecettesComponent {
   }
 
   getRecettes() {
-    this.recetteService.findAll().subscribe((responseEntityArray: Response[]) => {
+    this.recetteService.findByUserRef().subscribe((responseEntityArray: Response[]) => {
       this.recettes = responseEntityArray.map(responseEntity => responseEntity.recette);
       this.chefs = responseEntityArray.map(responseEntity => responseEntity.userVo);
 

@@ -16,6 +16,10 @@ export class RecetteService {
   findAll(): Observable<Response[]> {
     return this.http.get<Response[]>(this.apiUrl);
   }
+  findByUserRef(): Observable<Response[]> {
+    const getUrl = `${this.apiUrl}/user-id/${localStorage.getItem('refUser')||"ZE787"}`;
+    return this.http.get<Response[]>(getUrl);
+  }
 
   findById(recetteId: string): Observable<Recette> {
     const getUrl = `${this.apiUrl}/ref/${recetteId}`;
@@ -23,7 +27,7 @@ export class RecetteService {
   }
 
   delete(recetteId: string): Observable<void> {
-    const deleteUrl = `${this.apiUrl}/ref/${recetteId}`;
+    const deleteUrl = `${this.apiUrl}ref/${recetteId}`;
     return this.http.delete<void>(deleteUrl);
   }
 
@@ -32,6 +36,7 @@ export class RecetteService {
   }
 
   add(newRecette: Recette): Observable<Recette> {
+    console.log(newRecette);
     return this.http.post<Recette>(this.apiUrl, newRecette);
   }
 }
