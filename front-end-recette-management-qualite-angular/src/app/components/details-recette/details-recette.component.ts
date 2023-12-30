@@ -19,6 +19,8 @@ export class DetailsRecetteComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.clear();
+
     this.route.params.subscribe(params => {
       const recetteId: string = params['id'];
       this.recettesService.findById(recetteId).subscribe(

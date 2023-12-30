@@ -39,6 +39,7 @@ export class GestionRecettesComponent {
   }
 
   ngOnInit(): void {
+
     this.getRecettes();
 
   }
@@ -60,14 +61,18 @@ export class GestionRecettesComponent {
     });
   }
   generateRandomReference(): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const length = 8;
+    const buffer = new Uint8Array(length);
+    crypto.getRandomValues(buffer);
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+      result += characters.charAt(buffer[i] % characters.length);
     }
     return result;
   }
+
   deleteRecette(recetteD:Recette): void {
     this.recetteService.delete(recetteD.ref).subscribe(() => {
       this.recettes = this.recettes.filter(recette => recette.id !== recetteD.id);

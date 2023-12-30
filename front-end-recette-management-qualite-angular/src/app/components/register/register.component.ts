@@ -18,14 +18,18 @@ export class RegisterComponent implements OnInit {
   }
 
   generateRandomReference(): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const length = 8;
+    const buffer = new Uint8Array(length);
+    crypto.getRandomValues(buffer);
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+      result += characters.charAt(buffer[i] % characters.length);
     }
     return result;
   }
+
 
   register() {
     this.user.ref = this.generateRandomReference();

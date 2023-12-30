@@ -1,4 +1,3 @@
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { TypeService } from './../../services/type.service';
 import { Component } from '@angular/core';
 import { Recette } from 'src/app/models/recette';
@@ -21,6 +20,8 @@ export class HomeComponent {
     private typesService: TypeService) {}
 
   ngOnInit(): void {
+    localStorage.clear();
+
     this.getTypes();
     this.getRecettes();
 
